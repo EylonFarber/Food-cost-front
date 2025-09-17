@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Children, createContext, useContext, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
@@ -72,6 +72,7 @@ export const AppProvider = ({ children }) => {
         ingredient,
         updateIngredient,
         deleteHandler,
+        priceList
       }}
     >
       {children}
