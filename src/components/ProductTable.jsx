@@ -4,12 +4,12 @@ import Button from "./Button";
 import { useNavigate } from "react-router";
 
 export default function ProductTable() {
-  const { priceList, fetchPriceList ,deleteHandler} = useAppContext();
+  const { priceList, fetchPriceList ,deleteIngredient} = useAppContext();
 const navigate = useNavigate()
   useEffect(() => {
     fetchPriceList();
 
-  }, [deleteHandler]);
+  }, [deleteIngredient]);
 
   console.log(priceList);
   
@@ -27,7 +27,7 @@ const navigate = useNavigate()
       <div>
         <Button clickHandler={()=>navigate(`/pricelist/${product._id}`)}  btnText='info'  color={'btn-info'}  type='' />
         <Button clickHandler={()=>navigate(`/pricelist/update/${product._id}`)}  btnText='update'  color='btn-info'  type='' />
-        <Button clickHandler={()=>deleteHandler(product._id)}  btnText='delete'  color='btn-error'  type='' />
+        <Button clickHandler={()=>deleteIngredient(product._id)}  btnText='delete'  color='btn-error'  type='' />
     </div>
   </li>
           ))}

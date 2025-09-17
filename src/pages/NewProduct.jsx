@@ -4,7 +4,7 @@ import { useAppContext } from "../context/ProductContext";
 import { useNavigate } from "react-router";
 
 export default function NewProduct() {
-  const { createIngredient } = useAppContext();
+  const {createRecipe } = useAppContext();
 const navigate = useNavigate()
   function submitHandler(e) {
     e.preventDefault();

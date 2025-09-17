@@ -7,7 +7,36 @@ export const AppProvider = ({ children }) => {
   const homeUrl = "http://localhost:3000";
   const [priceList, setPriceList] = useState();
   const [ingredient, setIngredient] = useState({});
+  const [recipeList, setRecipeList] = useState();
 
+  function fetchRecipesList() {
+    axios
+      .get(`${homeUrl}/recipes`)
+      .then((res) => setRecipeList(res.data))
+      .catch((error) => console.log(error));
+  }
+
+  function createRecipe() {
+    axios
+      .post(`${homeUrl}/recipes`, {
+        name: "lastNewRec",
+        ingredients: [
+          {
+            productId: "68c58210089e841d7475a8a3",
+            productAmountKg: 7,
+          },
+          {
+            productId: "68c58210089e841d7475a8a3",
+            productAmountKg: 1,
+          },
+        ],
+        yeildKg: 5,
+      })
+      .then((res) => {
+        console.log("Success:", res.data);
+      })
+      .catch((error) => console.error("Error:", error));
+  }
   function fetchPriceList() {
     axios
       .get(`${homeUrl}/pricelist`)
@@ -50,11 +79,11 @@ export const AppProvider = ({ children }) => {
         supplierId: supplierIdInput,
         categoryId: categoryIdInput,
       })
-      .then((res) => (res.data))
+      .then((res) => res.data)
       .catch((error) => console.log(error));
   }
 
-  function deleteHandler(id) {
+  function deleteIngredient(id) {
     axios
       .delete(`http://localhost:3000/pricelist/${id}`)
       .then((res) => res)
@@ -71,8 +100,12 @@ export const AppProvider = ({ children }) => {
         fetchOneIngredient,
         ingredient,
         updateIngredient,
-        deleteHandler,
-        priceList
+        deleteIngredient,
+        priceList,
+        recipeList,
+        setRecipeList,
+        fetchRecipesList,
+        createRecipe,
       }}
     >
       {children}
